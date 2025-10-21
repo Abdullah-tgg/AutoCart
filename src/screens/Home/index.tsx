@@ -1,35 +1,29 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNavigation } from '@react-navigation/native';
-
-const ads = [
-  { id: '1', title: 'Toyota Corolla 2022', price: '$22,000' },
-  { id: '2', title: 'Honda Civic 2023', price: '$24,500' },
-  { id: '3', title: 'Suzuki Alto 2021', price: '$12,000' },
-];
+import AdCard from '../../components/AdCard';
+import carData from '../../data.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity
-      style={styles.card}
-      onPress={() => navigation.navigate('AdDetails', { adId: item.id })}
+    // onPress={() => navigation.navigate('AdDetails', { item: item })}
     >
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.price}>{item.price}</Text>
+      <AdCard item={item} />
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlashList
-        data={ads}
+        data={carData}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

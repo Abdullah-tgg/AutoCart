@@ -3,10 +3,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../screens/SplashScreen';
 import BottomTabs from './BottomTabs';
 import AdDetailsScreen from '../screens/AdDetails';
+import OnboardingScreen from '../screens/Onboarding';
 
 export type RootStackParamList = {
   Splash: undefined;
   MainTabs: undefined;
+  Onboarding: undefined;
   AdDetails: { adId: string };
 };
 
@@ -18,6 +20,7 @@ const AppNavigator = () => (
     screenOptions={{ headerShown: false }}
   >
     <Stack.Screen name="Splash" component={SplashScreen} />
+    <Stack.Screen name="Onboarding" component={OnboardingScreen} />
     <Stack.Screen name="MainTabs" component={BottomTabs} />
     <Stack.Screen name="AdDetails" component={AdDetailsScreen} />
   </Stack.Navigator>
