@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
-function AppNavigator() {
-  return null;
-}
+import AppNavigator from './src/navigation/AppNavigator.tsx';
 
 const App = () => {
   return (
