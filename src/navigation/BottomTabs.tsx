@@ -3,7 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/Home';
 import DummyScreen from '../screens/DummyScreen';
 import { Text } from 'react-native';
-
+import HomeIcon from '../assets/svg/Home.tsx';
+import Magnifier from '../assets/svg/Magnifier.tsx';
+import ScanIcon from '../assets/svg/Scan.tsx';
+import MessageIcon from '../assets/svg/Message.tsx';
+import UserIcon from '../assets/svg/User.tsx';
+import StoryIcon from '../assets/svg/StoryIcon.tsx';
 const Tab = createBottomTabNavigator();
 
 const ACTIVE = '#07B007';
@@ -18,10 +23,59 @@ const BottomTabs = () => {
         tabBarInactiveTintColor: INACTIVE,
         tabBarIcon: ({ focused }) => {
           if (route.name === 'Home') {
-            return <Text>?</Text>;
+            return (
+              <HomeIcon
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
           }
-          // Fallback: reuse Home icon for other tabs until their svgs are added
-          return <Text>?</Text>;
+          if (route.name === 'Search') {
+            return (
+              <Magnifier
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
+          }
+          if (route.name === 'Scan') {
+            return (
+              <ScanIcon
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
+          }
+          if (route.name === 'Messages') {
+            return (
+              <MessageIcon
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
+          }
+          if (route.name === 'Story') {
+            return (
+              <StoryIcon
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
+          }
+          if (route.name === 'Profile') {
+            return (
+              <UserIcon
+                color={focused ? ACTIVE : INACTIVE}
+                width={24}
+                height={24}
+              />
+            );
+          }
         },
         tabBarLabelStyle: { fontSize: 10, fontWeight: '600' },
       })}

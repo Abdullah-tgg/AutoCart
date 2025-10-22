@@ -7,12 +7,6 @@ export const styles = StyleSheet.create({
     borderRadius: RADIUS,
     padding: 12,
     gap: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
-    marginBottom: 20,
   },
   header: {
     flexDirection: 'row',

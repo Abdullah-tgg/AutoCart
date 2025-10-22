@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/AppNavigator.tsx';
 
@@ -15,8 +15,7 @@ const SplashScreen = ({ navigation }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>AutoCart</Text>
-      <ActivityIndicator size="large" color="#000" />
+      <Image source={require('../../assets/images/AutocartLogo.png')} />
     </View>
   );
 };
@@ -24,6 +23,11 @@ const SplashScreen = ({ navigation }: Props) => {
 export default SplashScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
   logo: { fontSize: 32, fontWeight: 'bold', marginBottom: 20 },
 });

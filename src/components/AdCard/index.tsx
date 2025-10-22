@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { styles } from './styles.ts';
+import Message2 from '../../assets/svg/Message2.tsx';
 
 export type AdItem = {
   id: number;
@@ -156,7 +157,7 @@ const AdCard: React.FC<Props> = ({
             <Text style={styles.actionIcon}>📞</Text>
           </Pressable>
           <Pressable style={styles.actionBtn} onPress={onPressMessage}>
-            <Text style={styles.actionIcon}>💬</Text>
+            <Message2 color="#115E59" width={18} height={18} />
           </Pressable>
           <Pressable style={styles.actionBtn} onPress={onPressNotify}>
             <Text style={styles.actionIcon}>🔔</Text>
