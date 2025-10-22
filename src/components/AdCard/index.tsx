@@ -9,6 +9,12 @@ import {
 } from 'react-native';
 import { styles } from './styles.ts';
 import Message2 from '../../assets/svg/Message2.tsx';
+import Phone from '../../assets/svg/Phone.tsx';
+import BellIcon from '../../assets/svg/Bell.tsx';
+import Eye from '../../assets/svg/Eye.tsx';
+import Heart from '../../assets/svg/Heart.tsx';
+import ShareIcon from '../../assets/svg/Share.tsx';
+import Location from '../../assets/svg/Location.tsx';
 
 export type AdItem = {
   id: number;
@@ -114,31 +120,32 @@ const AdCard: React.FC<Props> = ({
         </>
       ) : null}
 
-      {/* Title */}
-      <Text style={styles.title}>{item.title}</Text>
+      <View style={[styles.row, { justifyContent: 'space-between' }]}>
+        {/* Title */}
+        <Text style={styles.title}>{item.title}</Text>
 
+        {/* Stats */}
+        <View style={styles.statsRow}>
+          <View style={styles.stat}>
+            <Eye />
+            <Text style={styles.statText}>{shortNum(item.views)}</Text>
+          </View>
+          <View style={styles.stat}>
+            <Heart width={20} height={20} />
+            <Text style={styles.statText}>{shortNum(item.likes)}</Text>
+          </View>
+          <View style={styles.stat}>
+            <ShareIcon width={20} height={20} />
+            <Text style={styles.statText}>{shortNum(item.comments)}</Text>
+          </View>
+        </View>
+      </View>
       {/* Location */}
       <View style={styles.row}>
-        <Text style={styles.icon}>📍</Text>
+        <Location />
         <Text style={styles.location} numberOfLines={1}>
           {item.address}
         </Text>
-      </View>
-
-      {/* Stats */}
-      <View style={styles.statsRow}>
-        <View style={styles.stat}>
-          <Text style={styles.icon}>👁️</Text>
-          <Text style={styles.statText}>{shortNum(item.views)}</Text>
-        </View>
-        <View style={styles.stat}>
-          <Text style={styles.icon}>❤️</Text>
-          <Text style={styles.statText}>{shortNum(item.likes)}</Text>
-        </View>
-        <View style={styles.stat}>
-          <Text style={styles.icon}>💬</Text>
-          <Text style={styles.statText}>{shortNum(item.comments)}</Text>
-        </View>
       </View>
 
       {/* Description */}
@@ -153,14 +160,14 @@ const AdCard: React.FC<Props> = ({
           <Text style={styles.perMonth}>From $30/mo</Text>
         </View>
         <View style={styles.actions}>
-          <Pressable style={styles.actionBtn} onPress={onPressCall}>
-            <Text style={styles.actionIcon}>📞</Text>
+          <Pressable style={styles.phoneActionBtn} onPress={onPressCall}>
+            <Phone color="#1E40AF" width={24} height={24} />
           </Pressable>
           <Pressable style={styles.actionBtn} onPress={onPressMessage}>
-            <Message2 color="#115E59" width={18} height={18} />
+            <Message2 color="#115E59" width={22} height={22} />
           </Pressable>
-          <Pressable style={styles.actionBtn} onPress={onPressNotify}>
-            <Text style={styles.actionIcon}>🔔</Text>
+          <Pressable style={styles.notiBtn} onPress={onPressNotify}>
+            <BellIcon color="#991B1B" width={24} height={24} />
           </Pressable>
         </View>
       </View>

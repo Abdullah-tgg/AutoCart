@@ -69,7 +69,7 @@ export const styles = StyleSheet.create({
   title: { fontSize: 16, fontWeight: '700', color: '#0B1C2E', marginTop: 4 },
   row: { flexDirection: 'row', alignItems: 'center', marginTop: 2 },
   icon: { marginRight: 4 },
-  location: { flex: 1, color: '#667B8C' },
+  location: { flex: 1, color: '#667B8C', marginLeft: 5 },
 
   statsRow: {
     flexDirection: 'row',
@@ -96,6 +96,22 @@ export const styles = StyleSheet.create({
     height: 38,
     borderRadius: 10,
     backgroundColor: '#E9F7EA',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  notiBtn: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: '#FEF2F2',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  phoneActionBtn: {
+    width: 38,
+    height: 38,
+    borderRadius: 10,
+    backgroundColor: '#EFF6FF',
     alignItems: 'center',
     justifyContent: 'center',
   },
