@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
+import { useAds } from '../../contexts/AdsContext.tsx';
 
 const categories = [
   { label: 'Select Category', value: '' },
@@ -135,23 +136,6 @@ const CreateAdScreen: React.FC = () => {
     // Add your license lookup logic here
   };
 
-  const handlePublish = () => {
-    const adData = {
-      category,
-      licenseNumber,
-      itemName,
-      status,
-      images,
-      storyImages,
-      phoneNumber,
-      location,
-      price: `${currency}${price}`,
-      description,
-    };
-    console.log('Publishing ad:', adData);
-    navigation.goBack();
-  };
-
   const handlePreviewAd = () => {
     navigation.navigate('AdDetails', { item: mockAd });
   };
@@ -164,6 +148,47 @@ const CreateAdScreen: React.FC = () => {
   const getStatusLabel = () => {
     const stat = statuses.find(s => s.value === status);
     return stat ? stat.label : 'Select Status';
+  };
+
+  const { addAd } = useAds();
+
+  const handlePublish = () => {
+    const adData = {
+      category,
+      licenseNumber,
+      itemName,
+      status,
+      images,
+      storyImages,
+      phoneNumber,
+      location,
+      seller: {
+        name: 'Frances Swann',
+        type: 'Private Seller',
+        image: '../../assets/images/user1.jpg',
+      },
+      postedTime: 'Just Now',
+      views: 0,
+      likes: 0,
+      comments: 0,
+      mileage: '80,000',
+      fuelType: 'Petrol',
+      transmission: 'Automatic',
+      year: 2024,
+      make: 'BMW',
+      model: '520 M Sport',
+      color: 'White',
+      door: 4,
+      seats: 5,
+      trim: '---',
+      currency,
+      price,
+      description,
+    };
+
+    addAd(adData);
+    console.log('Publishing ad:', adData);
+    navigation.goBack();
   };
 
   return (

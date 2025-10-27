@@ -53,7 +53,6 @@ const AdCard: React.FC<Props> = ({
   const [first, ...rest] = item.images as Array<string | ImageSourcePropType>;
   const thumbs = rest.slice(0, 3);
   const extra = Math.max(item.images.length - 4, 0);
-  console.log(first);
   return (
     <View style={styles.card}>
       {/* Seller header */}
@@ -86,7 +85,7 @@ const AdCard: React.FC<Props> = ({
       {first ? (
         <>
           <Image
-            source={require('../../assets/images/car1_1.jpg')}
+            source={{ uri: item.images[0].uri }}
             style={styles.mainImage}
             resizeMode="cover"
           />
@@ -122,7 +121,7 @@ const AdCard: React.FC<Props> = ({
 
       <View style={[styles.row, { justifyContent: 'space-between' }]}>
         {/* Title */}
-        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.itemName}</Text>
 
         {/* Stats */}
         <View style={styles.statsRow}>
@@ -144,7 +143,7 @@ const AdCard: React.FC<Props> = ({
       <View style={styles.row}>
         <Location />
         <Text style={styles.location} numberOfLines={1}>
-          {item.address}
+          {item.location}
         </Text>
       </View>
 

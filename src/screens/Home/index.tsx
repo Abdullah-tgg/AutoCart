@@ -14,11 +14,13 @@ import AdCard from '../../components/AdCard';
 import carData from '../../data.json';
 import Carousel from 'react-native-reanimated-carousel';
 import Filter from '../../assets/svg/Filter.tsx';
+import { useAds } from '../../contexts/AdsContext.tsx';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
-
+  const { ads } = useAds();
+  console.log('ADS', ads);
   const renderItem = ({ item }: any) => (
     <TouchableOpacity
       activeOpacity={1}
@@ -57,7 +59,7 @@ const HomeScreen = () => {
       <Carousel
         width={SCREEN_WIDTH}
         height={SCREEN_HEIGHT - 120}
-        data={carData}
+        data={ads}
         vertical={true}
         pagingEnabled={true}
         snapEnabled={true}
