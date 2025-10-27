@@ -11,6 +11,7 @@ import {
   FlatList,
 } from 'react-native';
 import type { ImageSourcePropType } from 'react-native';
+import LeftChevron from '../../assets/svg/LeftChevron.tsx';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const IMAGE_SIZE = (SCREEN_WIDTH - 32) / 3; // 3 columns with padding
@@ -54,7 +55,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backIcon}>←</Text>
+          <LeftChevron />
         </Pressable>
       </View>
 

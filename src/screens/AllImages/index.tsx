@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import type { ImageSourcePropType } from 'react-native';
+import LeftChevron from '../../assets/svg/LeftChevron.tsx';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -38,7 +39,7 @@ const AllImages: React.FC<AllImagesProps> = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backIcon}>←</Text>
+          <LeftChevron />
         </Pressable>
         <Text style={styles.counter}>
           {currentIndex + 1}/{images.length}

@@ -20,7 +20,7 @@ export const s = StyleSheet.create({
     // margin: 16,
     height: '100%',
     borderRadius: R,
-    padding: 12,
+    // padding: 12,
     gap: 10,
   },
   topBar: {
@@ -133,7 +133,7 @@ export const s = StyleSheet.create({
     alignItems: 'center',
   },
   specValue: { fontWeight: '700', color: '#0B1C2E' },
-  specLabel: { marginTop: 2, color: '#7A8A9D', fontSize: 12 },
+  specLabel: { marginTop: 2, color: '#7A8A9D', fontSize: 11 },
   grid: {
     marginTop: 10,
     borderWidth: 1,

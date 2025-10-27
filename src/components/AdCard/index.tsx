@@ -149,7 +149,7 @@ const AdCard: React.FC<Props> = ({
       </View>
 
       {/* Description */}
-      <Text style={styles.desc} numberOfLines={3}>
+      <Text style={styles.desc} numberOfLines={2}>
         {item.description}
       </Text>
 

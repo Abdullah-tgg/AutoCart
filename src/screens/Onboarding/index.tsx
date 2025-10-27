@@ -3,6 +3,7 @@ import {
   ImageBackground,
   Pressable,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -13,6 +14,7 @@ const OnboardingScreen: React.FC = () => {
   const navigation = useNavigation<any>();
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       <ImageBackground
         source={require('../../assets/images/onboarding.jpg')}
         style={styles.image}

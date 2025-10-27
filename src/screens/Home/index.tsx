@@ -21,6 +21,7 @@ const HomeScreen = () => {
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity
+      activeOpacity={1}
       onPress={() => navigation.navigate('AdDetails', { item: item })}
     >
       <AdCard item={item} />
