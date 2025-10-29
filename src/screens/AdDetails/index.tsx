@@ -72,19 +72,18 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
   }, [navigation]);
 
   const dummy = useCallback(() => {}, []);
-  const images = useMemo<ImageSourcePropType[]>(
-    () => [
-      require('../../assets/images/car1_1.jpg'),
-      require('../../assets/images/car1_2.jpg'),
-      require('../../assets/images/car1_3.jpg'),
-      require('../../assets/images/car1_4.jpg'),
-      require('../../assets/images/car1_5.jpg'),
-      require('../../assets/images/car1_6.jpg'),
-      require('../../assets/images/car1_7.jpg'),
-    ],
-    [],
-  );
+  const images = useMemo(() => item.images, []);
 
+  const onViewStory = useCallback(() => {
+    navigation.navigate('ViewStory', {
+      stories: item.storyImages,
+      title: 'My Story (Preview)',
+      views: item.views,
+      onSeeAd: () => {
+        navigation.goBack();
+      },
+    });
+  }, [navigation, item]);
   return (
     <SafeAreaView style={s.container}>
       <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
@@ -97,7 +96,7 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
           <Pressable hitSlop={10} onPress={onPressBack}>
             <LeftChevron />
           </Pressable>
-          <TouchableOpacity style={s.story}>
+          <TouchableOpacity style={s.story} onPress={onViewStory}>
             <Text style={s.whiteText}>View story</Text>
           </TouchableOpacity>
         </View>
@@ -140,7 +139,7 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
 
         {/* Title */}
         <View style={[s.row, { justifyContent: 'space-between' }]}>
-          <Text style={s.title}>{item.title}</Text>
+          <Text style={s.title}>{item.itemName}</Text>
           {/* Quick stats */}
           <View style={[s.statsRow, { marginTop: 0 }]}>
             <View style={s.row}>
@@ -162,7 +161,7 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
         <View style={s.row}>
           <Location width={22} height={22} color={'#9CA3AF'} />
           <Text style={s.location} numberOfLines={1}>
-            {item.address}
+            {item.location}
           </Text>
         </View>
         {/* Price + actions */}

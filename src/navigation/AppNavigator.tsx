@@ -8,6 +8,8 @@ import AllImages from '../screens/AllImages';
 import ImageGrid from '../screens/ImageGrid';
 import FilterScreen from '../screens/FilterScreen';
 import CreateAd from '../screens/CreateAd';
+import ViewStory from '../screens/ViewStory';
+import CameraScanner from '../screens/Scan/CameraScanner';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -17,7 +19,14 @@ export type RootStackParamList = {
   AllImages: { images: any[]; initialIndex?: number };
   ImageGrid: { images: any[] };
   Filter: undefined;
+  CameraScanner: undefined;
   CreateAd: undefined;
+  ViewStory: {
+    stories: Array<string | { uri: string }>;
+    title?: string;
+    views?: number;
+    onSeeAd?: () => void;
+  };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +44,8 @@ const AppNavigator = () => (
     <Stack.Screen name="ImageGrid" component={ImageGrid} />
     <Stack.Screen name="Filter" component={FilterScreen} />
     <Stack.Screen name="CreateAd" component={CreateAd} />
+    <Stack.Screen name="ViewStory" component={ViewStory} />
+    <Stack.Screen name="CameraScanner" component={CameraScanner} />
   </Stack.Navigator>
 );
 

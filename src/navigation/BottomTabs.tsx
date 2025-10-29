@@ -9,6 +9,7 @@ import ScanIcon from '../assets/svg/Scan.tsx';
 import MessageIcon from '../assets/svg/Message.tsx';
 import UserIcon from '../assets/svg/User.tsx';
 import StoryIcon from '../assets/svg/StoryIcon.tsx';
+import Scan from '../screens/Scan';
 const Tab = createBottomTabNavigator();
 
 const ACTIVE = '#07B007';
@@ -82,7 +83,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Search" component={DummyScreen} />
-      <Tab.Screen name="Scan" component={DummyScreen} />
+      <Tab.Screen name="Scan" component={Scan} />
       <Tab.Screen name="Messages" component={DummyScreen} />
       <Tab.Screen name="Story" component={DummyScreen} />
       <Tab.Screen name="Profile" component={DummyScreen} />

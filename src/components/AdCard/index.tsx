@@ -15,6 +15,7 @@ import Eye from '../../assets/svg/Eye.tsx';
 import Heart from '../../assets/svg/Heart.tsx';
 import ShareIcon from '../../assets/svg/Share.tsx';
 import Location from '../../assets/svg/Location.tsx';
+import { Ad } from '../../contexts/AdsContext.tsx';
 
 export type AdItem = {
   id: number;
@@ -31,7 +32,7 @@ export type AdItem = {
 };
 
 type Props = {
-  item: AdItem;
+  item: Ad;
   onPressCall?: () => void;
   onPressMessage?: () => void;
   onPressNotify?: () => void;
@@ -96,7 +97,7 @@ const AdCard: React.FC<Props> = ({
                 return (
                   <ImageBackground
                     key={idx}
-                    source={require('../../assets/images/car1_2.jpg')}
+                    source={{ uri: item.images[idx].uri }}
                     style={styles.thumb}
                     imageStyle={styles.thumbImage}
                   >
@@ -109,7 +110,7 @@ const AdCard: React.FC<Props> = ({
               return (
                 <Image
                   key={idx}
-                  source={require('../../assets/images/car1_1.jpg')}
+                  source={{ uri: item.images[idx].uri }}
                   style={styles.thumb}
                   resizeMode="cover"
                 />

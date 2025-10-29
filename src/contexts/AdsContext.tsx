@@ -12,11 +12,26 @@ export interface Ad {
     type: string;
     profileImage: string;
   };
+  views: number;
+  likes: number;
+  comments: number;
+  mileage: string;
+  fuelType: string;
+  transmission: string;
+  make: string;
+  model: string;
+  color: string;
+  door: number;
+  seats: number;
+  trim: string;
+  year: number;
+  address: string;
   storyImages: any[];
   phoneNumber: string;
   location: string;
+  postedTime: string;
   currency: string;
-  price: string;
+  price: number;
   description: string;
   createdAt: Date;
 }

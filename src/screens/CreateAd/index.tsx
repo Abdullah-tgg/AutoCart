@@ -14,7 +14,9 @@ import {
 } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
-import { useAds } from '../../contexts/AdsContext.tsx';
+import { Ad, useAds } from '../../contexts/AdsContext.tsx';
+import uuid from 'react-native-uuid';
+import LeftChevron from '../../assets/svg/LeftChevron.tsx';
 
 const categories = [
   { label: 'Select Category', value: '' },
@@ -139,6 +141,14 @@ const CreateAdScreen: React.FC = () => {
   const handlePreviewAd = () => {
     navigation.navigate('AdDetails', { item: mockAd });
   };
+  console.log(storyImages);
+  const handlePreviewStory = () => {
+    navigation.navigate('ViewStory', {
+      stories: storyImages,
+      title: 'My Story (Preview)',
+      views: 0,
+    });
+  };
 
   const getCategoryLabel = () => {
     const cat = categories.find(c => c.value === category);
@@ -153,7 +163,8 @@ const CreateAdScreen: React.FC = () => {
   const { addAd } = useAds();
 
   const handlePublish = () => {
-    const adData = {
+    const adData: Ad = {
+      id: uuid.v4(),
       category,
       licenseNumber,
       itemName,
@@ -163,9 +174,9 @@ const CreateAdScreen: React.FC = () => {
       phoneNumber,
       location,
       seller: {
-        name: 'Frances Swann',
+        name: 'Abdullah Zafar',
         type: 'Private Seller',
-        image: '../../assets/images/user1.jpg',
+        profileImage: '../../assets/images/user1.jpg',
       },
       postedTime: 'Just Now',
       views: 0,
@@ -201,7 +212,7 @@ const CreateAdScreen: React.FC = () => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backIcon}>←</Text>
+          <LeftChevron />
         </Pressable>
         <Text style={styles.headerTitle}>Place Ad</Text>
         <Pressable onPress={handleReset}>
@@ -317,7 +328,10 @@ const CreateAdScreen: React.FC = () => {
               ))}
             </View>
           )}
-          <Pressable style={styles.previewStoryButton}>
+          <Pressable
+            style={styles.previewStoryButton}
+            onPress={handlePreviewStory}
+          >
             <Text style={styles.previewStoryText}>Preview Story</Text>
           </Pressable>
         </View>

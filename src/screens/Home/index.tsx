@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AdCard from '../../components/AdCard';
-import carData from '../../data.json';
 import Carousel from 'react-native-reanimated-carousel';
 import Filter from '../../assets/svg/Filter.tsx';
 import { useAds } from '../../contexts/AdsContext.tsx';
@@ -20,7 +19,7 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
   const { ads } = useAds();
-  console.log('ADS', ads);
+
   const renderItem = ({ item }: any) => (
     <TouchableOpacity
       activeOpacity={1}
@@ -56,16 +55,31 @@ const HomeScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <Carousel
-        width={SCREEN_WIDTH}
-        height={SCREEN_HEIGHT - 120}
-        data={ads}
-        vertical={true}
-        pagingEnabled={true}
-        snapEnabled={true}
-        loop={false}
-        renderItem={renderItem}
-      />
+      {ads.length > 0 ? (
+        <Carousel
+          width={SCREEN_WIDTH}
+          height={SCREEN_HEIGHT - 120}
+          data={ads}
+          vertical={true}
+          pagingEnabled={true}
+          snapEnabled={true}
+          loop={false}
+          renderItem={renderItem}
+        />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>
+            Post your first ad to kick off your selling journey.
+          </Text>
+          <Text>The sooner you start, the faster you sell. </Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CreateAd')}
+            style={styles.adButton}
+          >
+            <Text style={styles.logoText}>Place your first Ad</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -76,7 +90,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // padding: 16,
+    paddingTop: '10%',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 12,
   },
   row: {
     flexDirection: 'row',
@@ -110,6 +130,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     color: '#fff',
+  },
+  emptyText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#000',
   },
   adButton: {
     height: 30,
