@@ -17,6 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Ad, useAds } from '../../contexts/AdsContext.tsx';
 import uuid from 'react-native-uuid';
 import LeftChevron from '../../assets/svg/LeftChevron.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const categories = [
   { label: 'Select Category', value: '' },
@@ -161,6 +162,7 @@ const CreateAdScreen: React.FC = () => {
   };
 
   const { addAd } = useAds();
+  const insets = useSafeAreaInsets();
 
   const handlePublish = () => {
     const adData: Ad = {
@@ -203,7 +205,7 @@ const CreateAdScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}> {/* Apply insets.top for dynamic padding */}
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}

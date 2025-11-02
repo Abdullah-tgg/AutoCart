@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import { s } from './styles';
@@ -27,6 +28,7 @@ import Mileage from '../../assets/svg/Mileage.tsx';
 import Transmission from '../../assets/svg/Transmission.tsx';
 import Fuel from '../../assets/svg/Fuel.tsx';
 import LeftChevron from '../../assets/svg/LeftChevron.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 type Seller = {
   name: string;
   type: string;
@@ -73,6 +75,8 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
 
   const dummy = useCallback(() => {}, []);
   const images = useMemo(() => item.images, []);
+  const insets = useSafeAreaInsets();
+
 
   const onViewStory = useCallback(() => {
     navigation.navigate('ViewStory', {
@@ -85,11 +89,16 @@ const AdDetailsCard: React.FC<Props> = ({ route }) => {
     });
   }, [navigation, item]);
   return (
-    <SafeAreaView style={s.container}>
+  <SafeAreaView style={[s.container, { flex: 1, backgroundColor: '#fff' }]}>
       <StatusBar barStyle="dark-content" backgroundColor={'#fff'} />
       <ScrollView
         style={s.scrollContainer}
         showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+        paddingTop: Platform.OS === 'android' ? insets.top + 10 : 10,
+        paddingBottom: insets.bottom + 30, // leave room for bottom safe area
+        paddingHorizontal: 12,
+      }}
       >
         {/* Top bar (optional back) */}
         <View style={s.topBar}>

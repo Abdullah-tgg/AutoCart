@@ -15,6 +15,7 @@ import { s } from './styles';
 import LeftChevron from '../../assets/svg/LeftChevron';
 import ShareIcon from '../../assets/svg/Share';
 import Eye from '../../assets/svg/Eye';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ViewStoryProps = {
   route: {
@@ -41,6 +42,8 @@ const ViewStory: React.FC<ViewStoryProps> = ({ route }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+    const insets = useSafeAreaInsets();
+  
   const progressAnims = useRef(
     stories.map(() => new Animated.Value(0)),
   ).current;
@@ -135,7 +138,7 @@ const ViewStory: React.FC<ViewStoryProps> = ({ route }) => {
   };
 
   return (
-    <SafeAreaView style={s.container}>
+    <SafeAreaView style={[s.container, { paddingTop: insets.top }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header with white background */}

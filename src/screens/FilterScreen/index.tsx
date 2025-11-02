@@ -10,6 +10,7 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type FilterScreenProps = {
   navigation: any;
@@ -75,6 +76,8 @@ const FilterScreen: React.FC<FilterScreenProps> = ({ navigation }) => {
   const [modalData, setModalData] = useState<any[]>([]);
   const [modalTitle, setModalTitle] = useState('');
   const [onSelectCallback, setOnSelectCallback] = useState<any>(null);
+    const insets = useSafeAreaInsets();
+  
 
   const handleClearAll = () => {
     setCategory('');
@@ -125,7 +128,7 @@ const FilterScreen: React.FC<FilterScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}
