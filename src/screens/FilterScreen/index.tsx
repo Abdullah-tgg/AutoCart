@@ -9,8 +9,10 @@ import {
   ScrollView,
   Modal,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import BackIcon from '../../assets/svg/back';
 
 type FilterScreenProps = {
   navigation: any;
@@ -128,7 +130,7 @@ const FilterScreen: React.FC<FilterScreenProps> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}
@@ -137,7 +139,8 @@ const FilterScreen: React.FC<FilterScreenProps> = ({ navigation }) => {
           onPress={() => navigation.goBack()}
           style={styles.backButton}
         >
-          <Text style={styles.backIcon}>←</Text>
+          <BackIcon height={18} width={18}/>
+          {/* <Text style={styles.backIcon}>←</Text> */}
         </Pressable>
         <Text style={styles.headerTitle}>Filter</Text>
         <Pressable onPress={handleClearAll}>

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type RootStackParamList = {
   CameraScanner: undefined;
@@ -21,6 +22,7 @@ type ScanScreenProps = {
 
 const Scan: React.FC<ScanScreenProps> = ({}) => {
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
   const handleOpenCamera = () => {
     navigation.navigate('CameraScanner');
   };
@@ -31,8 +33,8 @@ const Scan: React.FC<ScanScreenProps> = ({}) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
+<SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
+        <View style={styles.content}>
         {/* Header */}
         <Text style={styles.header}>Reg Scanner</Text>
 

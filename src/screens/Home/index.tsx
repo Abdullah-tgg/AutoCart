@@ -14,11 +14,13 @@ import AdCard from '../../components/AdCard';
 import Carousel from 'react-native-reanimated-carousel';
 import Filter from '../../assets/svg/Filter.tsx';
 import { useAds } from '../../contexts/AdsContext.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const HomeScreen = () => {
   const navigation = useNavigation<any>();
   const { ads } = useAds();
+  const insets = useSafeAreaInsets()
 
   const renderItem = ({ item }: any) => (
     <TouchableOpacity
@@ -30,7 +32,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top, paddingBottom: insets.bottom }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       {/* Header */}
       <View style={styles.header}>

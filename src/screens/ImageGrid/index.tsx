@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import type { ImageSourcePropType } from 'react-native';
 import LeftChevron from '../../assets/svg/LeftChevron.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const IMAGE_SIZE = (SCREEN_WIDTH - 32) / 3; // 3 columns with padding
@@ -27,6 +28,7 @@ type ImageGridProps = {
 
 const ImageGrid: React.FC<ImageGridProps> = ({ route, navigation }) => {
   const { images } = route.params;
+  const insets = useSafeAreaInsets()
 
   const renderItem = ({
     item,
@@ -46,7 +48,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ route, navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}

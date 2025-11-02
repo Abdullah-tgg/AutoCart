@@ -139,9 +139,43 @@ const CreateAdScreen: React.FC = () => {
     // Add your license lookup logic here
   };
 
-  const handlePreviewAd = () => {
-    navigation.navigate('AdDetails', { item: mockAd });
+const handlePreviewAd = () => {
+  const adData = {
+    id: uuid.v4(),  // Generate a unique id
+    title: itemName,  // The item name is the ad title
+    price: parseFloat(price),  // Ensure price is a number
+    views: 0,  // Default value for preview
+    likes: 0,  // Default value for preview
+    comments: 0,  // Default value for preview
+    address: location,  // Set the address as the location
+    year: 2024,  // You can set this statically or dynamically from the form
+    mileage: '80,000',  // Static or dynamic depending on input
+    fuelType: 'Petrol',  // Static or dynamic depending on input
+    transmission: 'Automatic',  // Static or dynamic depending on input
+    description,  // Description from the form
+    make: 'BMW',  // Static or dynamic depending on input
+    model: '520 M Sport',  // Static or dynamic depending on input
+    color: 'White',  // Static or dynamic depending on input
+    door: 4,  // Static or dynamic depending on input
+    seats: 5,  // Static or dynamic depending on input
+    trim: '---',  // Static or dynamic depending on input
+    seller: {
+      name: 'Abdullah Zafar',  // Static or dynamic depending on input
+      type: 'Private Seller',  // Static or dynamic depending on input
+      profileImage: '../../assets/images/user1.jpg',  // Static or dynamic depending on input
+    },
+    postedTime: 'Just Now',  // Static or dynamic depending on input
+    images,  // From the images uploaded in the form
+    storyImages,  // From the story images uploaded in the form
+    category,  // Category selected by the user
+    status,  // Status selected by the user
+    currency,  // Currency selected by the user
   };
+
+  // Navigate to the AdDetails screen with adData
+  navigation.navigate('AdDetails', { item: adData });
+};
+
   console.log(storyImages);
   const handlePreviewStory = () => {
     navigation.navigate('ViewStory', {
@@ -205,7 +239,7 @@ const CreateAdScreen: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}> {/* Apply insets.top for dynamic padding */}
+    <SafeAreaView style={[styles.container, { paddingTop: insets.top }]}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       {/* Header */}
