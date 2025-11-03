@@ -3,7 +3,7 @@ import {
   View,
   Image,
   StyleSheet,
-  Dimensions,
+  useWindowDimensions,
   SafeAreaView,
   StatusBar,
   Pressable,
@@ -12,66 +12,55 @@ import {
 import Carousel from 'react-native-reanimated-carousel';
 import type { ImageSourcePropType } from 'react-native';
 import LeftChevron from '../../assets/svg/LeftChevron.tsx';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
-
-type AllImagesProps = {
-  route: {
-    params: {
-      images: ImageSourcePropType[];
-      initialIndex?: number;
-    };
-  };
-  navigation: any;
-};
-
-const AllImages: React.FC<AllImagesProps> = ({ route, navigation }) => {
+const AllImages = ({ route, navigation }) => {
   const { images, initialIndex = 0 } = route.params;
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const insets = useSafeAreaInsets();
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" translucent={false} />
 
       {/* Header */}
-      <View style={styles.header}>
-        <Pressable
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}
-        >
+      <View style={[styles.header, { paddingTop: insets.top }]}>
+        <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
           <LeftChevron />
         </Pressable>
-        <Text style={styles.counter}>
-          {currentIndex + 1}/{images.length}
-        </Text>
+
+        <Text style={styles.counter}>{currentIndex + 1}/{images.length}</Text>
+
         <Pressable
           style={styles.viewAllButton}
-          onPress={() =>
-            navigation.navigate('ImageGrid', {
-              images,
-            })
-          }
+          onPress={() => navigation.navigate('ImageGrid', { images })}
         >
           <Text style={styles.viewAllText}>📊 View All</Text>
         </Pressable>
       </View>
 
+      {/* Carousel */}
       <View style={styles.carouselContainer}>
         <Carousel
           width={SCREEN_WIDTH}
-          height={SCREEN_HEIGHT - 120}
+          height={SCREEN_HEIGHT * 0.8} // dynamic & safe
           data={images}
           defaultIndex={initialIndex}
-          onSnapToItem={index => setCurrentIndex(index)}
+          onSnapToItem={setCurrentIndex}
           renderItem={({ item }) => (
             <View style={styles.imageContainer}>
-              <Image source={item} style={styles.image} resizeMode="contain" />
+              <Image
+                source={item}
+                style={[styles.image, { width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 0.8 }]}
+                resizeMode="contain"
+              />
             </View>
           )}
         />
 
-        {/* Dots indicator */}
-        <View style={styles.dotsContainer}>
+        {/* Dots */}
+        <View style={[styles.dotsContainer, { bottom: insets.bottom + 10 }]}>
           {images.map((_, index) => (
             <View
               key={index}
@@ -85,7 +74,7 @@ const AllImages: React.FC<AllImagesProps> = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#fff',
   },
@@ -94,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 10,
     backgroundColor: '#fff',
   },
   backButton: {
@@ -102,14 +91,6 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  carouselContainer: {
-    flex: 1,
-    position: 'relative',
-  },
-  backIcon: {
-    fontSize: 24,
-    color: '#000',
   },
   counter: {
     fontSize: 16,
@@ -127,18 +108,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
   },
+  carouselContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    position: 'relative',
+  },
   imageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    width: SCREEN_WIDTH,
-    height: '100%',
+    resizeMode: 'contain',
   },
   dotsContainer: {
     position: 'absolute',
-    bottom: 30,
     flexDirection: 'row',
     alignSelf: 'center',
     gap: 6,
@@ -151,7 +135,6 @@ const styles = StyleSheet.create({
   },
   activeDot: {
     backgroundColor: '#07B007',
-    width: 8,
   },
 });
 
